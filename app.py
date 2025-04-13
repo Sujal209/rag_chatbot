@@ -18,18 +18,9 @@ First, let's install the necessary libraries.
 """
 
 # Install required packages
-langchain 
-langchain-google-genai 
-langchain_community 
-pypdf 
-chromadb 
-sentence-transformers 
-google-generativeai 
-pdfplumber 
 
 """Next, let's import all required libraries:"""
 
-streamlit
 
 
 import os
