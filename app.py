@@ -33,8 +33,7 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferMemory
 
-from google.colab import userdata
-os.environ["GOOGLE_API_KEY"] = userdata.get("GEMINI_API_KEY")
+api_key = st.text_input("Enter Gemini API Key:")
 
 import streamlit as st
 import os
