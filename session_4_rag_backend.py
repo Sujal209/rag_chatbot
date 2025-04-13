@@ -117,20 +117,28 @@ def store_embeddings(
     metadatas: Optional[List[Dict[str, str]]] = None
 ) -> Optional[Chroma]:
     try:
-        print(f"🧠 Storing {len(text_chunks)} chunks to ChromaDB...")
+        if not text_chunks:
+            raise ValueError("Text chunks are empty — cannot store embeddings.")
+
+        os.makedirs(persist_directory, exist_ok=True)
+
+        print(f"🧠 Storing {len(text_chunks)} chunks to ChromaDB at {persist_directory}...")
+
         vectorstore = Chroma.from_texts(
             texts=text_chunks,
             embedding=embedding_model,
             collection_name=collection_name,
             persist_directory=persist_directory,
-            metadatas=metadatas
+            metadatas=metadatas or None  # Avoid mismatch
         )
         vectorstore.persist()
         print("✅ Vector database created and saved")
         return vectorstore
+
     except Exception as e:
         print(f"❌ Failed to create vector database: {e}")
         return None
+
 
 
 # ----------------------------------------
